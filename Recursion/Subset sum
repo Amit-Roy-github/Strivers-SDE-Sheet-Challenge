@@ -1,0 +1,19 @@
+#include <bits/stdc++.h> 
+ void subset(int j,int sum,vector<int>&ans,vector<int>&arr)
+{
+     if(j==arr.size())
+     {
+         ans.push_back(sum);
+         return;
+     }
+     subset(j+1,sum+arr[j],ans,arr);
+     subset(j+1,sum ,ans,arr);
+}
+vector<int> subsetSum(vector<int> &num)
+{
+    // Write your code here.
+    vector<int>ans;
+    subset(0,0,ans,num);
+    sort(ans.begin(),ans.end());
+    return ans;
+}
