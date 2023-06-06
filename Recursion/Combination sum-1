@@ -1,0 +1,27 @@
+#include<bits/stdc++.h>
+void subset(int i, int sum,vector<int>&arr,vector<int>&tem,set<vector<int>>&ans)
+{
+    if(sum==0)
+    {
+        ans.insert(tem);
+        return;
+    }
+    if(i==arr.size())return;
+
+    if (sum >= arr[i]) {
+        tem.push_back(arr[i]);
+      subset(i + 1,   sum - arr[i], arr, tem, ans);
+      tem.pop_back();
+    }
+    subset(i+1, sum,arr,tem,ans);
+}
+vector<vector<int>> combinationSum2(vector<int> &arr, int n, int k)
+{
+	// Write your code here.
+	sort(arr.begin(),arr.end());
+	 set<vector<int>>ans;
+    vector<int>tem;
+    subset(0,k,arr,tem,ans);
+	vector<vector<int>>v(ans.begin(),ans.end());
+    return v;
+}
