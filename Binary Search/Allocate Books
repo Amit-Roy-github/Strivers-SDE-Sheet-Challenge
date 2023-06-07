@@ -1,0 +1,39 @@
+#include <bits/stdc++.h> 
+bool allcation(int mid,int m,vector<int>&time)
+{
+	int c=0;
+	int pages=0;
+	for(int i=0;i<time.size();i++)
+	{
+		if(time[i]>mid)return 0;
+
+		if(pages+time[i]>mid)
+		{
+			c++;
+			pages=time[i];
+		}
+		else
+		pages+=time[i];
+	}
+	return c<m;
+}
+long long ayushGivesNinjatest(int n, int m, vector<int> time) 
+{	
+	// Write your code here.
+	int s=time[0];
+	int e=0;
+	for(auto i:time)
+	{
+		e+=i;
+		s=min(i,s);
+	}
+	while(s<=e)
+	{
+		int mid=(s+e)>>1;
+		if(allcation(mid,n,time))
+		e=mid-1;
+		else
+		s=mid+1;
+	}
+	return s;
+}
