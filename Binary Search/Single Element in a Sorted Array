@@ -1,0 +1,14 @@
+int singleNonDuplicate(vector<int>& v)
+{
+	// Write your code here
+    int s=0,e=v.size()-2;
+    while(s<=e)
+    {
+        int mid=(s+e)>>1;
+         if(v[mid]==v[mid^1])
+         s=mid+1;
+         else 
+         e=mid-1;
+    }
+    return v[s];
+}
