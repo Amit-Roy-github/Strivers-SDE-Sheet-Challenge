@@ -1,0 +1,43 @@
+bool possible(vector<int>nums,int n,int mid,int m)
+{
+	int cow=1;
+	int last=nums[0];
+
+	for(int i=0;i<n;i++)
+	{
+		if(nums[i]-last>=mid)
+		{
+			 cow++;
+			 if(cow==m)
+			 {
+			 	return true;
+			 }
+			 last=nums[i];
+		}
+	}
+	return false;
+}
+int aggressiveCows(vector<int> &nums, int m)
+{
+     int s=0;
+	int sum=-1;
+	sort(nums.begin(),nums.end());
+
+	 int n=nums.size();
+	int e=nums[n-1]-nums[0],ans=-1;
+	
+	while(s<=e)
+	{
+		 
+		int mid=s+(e-s)/2;
+		 if(possible(nums,n,mid,m))
+		 {
+		 	ans=mid;
+		 	s=mid+1;
+		 }
+		 else
+		 	e=mid-1;
+
+	}
+	return ans;
+}
