@@ -1,0 +1,34 @@
+class Solution {
+public:
+    void solve(int col,int n,vector<string>&tem,vector<vector<string>>&ans,vector<int>&row,vector<int>&up,vector<int>&dw)
+    {
+        if(col==n)
+        {
+            ans.push_back(tem);
+            return;
+        }
+        for(int r=0;r<n;r++)
+        {
+            if(row[r]==0 && up[n-1+col-r]==0 && dw[col+r]==0)
+            {
+                tem[r][col]='Q';
+                row[r]=up[n-1+col-r]=dw[col+r]=1;
+                solve(col+1,n,tem,ans,row,up,dw);
+                tem[r][col]='.';
+                 row[r]=up[n-1+col-r]=dw[col+r]=0;
+            }
+        }
+    }
+    vector<vector<string>> solveNQueens(int n) {
+        vector<vector<string>> ans;
+        string s(n,'.');
+        vector<string>tem(n);
+        for(int i=0;i<n;i++)
+        {
+            tem[i]=s;
+        }
+        vector<int>row(n,0),up(2*n-1,0),dw(2*n-1,0);
+        solve(0,n,tem,ans ,row,up,dw);
+        return ans;
+    }
+};
