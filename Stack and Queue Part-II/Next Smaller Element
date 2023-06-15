@@ -1,0 +1,25 @@
+ #include<bits/stdc++.h>
+vector<int> nextSmallerElement(vector<int> &arr, int n)
+{
+ stack<pair<int, int> > s;
+     
+     for (int i = 0; i < n; i++) {
+        int next = arr[i];
+  
+        while (!s.empty() && s.top().first > next) {
+            arr[s.top().second] = next;
+            s.pop();
+        }
+ 
+  
+        s.push({ next, i });
+    }
+ 
+     
+    while (!s.empty()) {
+        arr[s.top().second] = -1;
+        s.pop();
+    }
+     return arr;
+ 
+}
