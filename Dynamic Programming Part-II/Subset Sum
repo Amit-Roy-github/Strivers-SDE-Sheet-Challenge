@@ -1,0 +1,33 @@
+class Solution {
+public:
+    bool canPartition(vector<int>& nums) {
+        int sum=accumulate(nums.begin(),nums.end(),0);
+
+        if(sum&1)
+        return false;
+        
+        return solve(nums.size(),sum/2,nums);
+    }
+    bool solve(int n,int tar,vector<int>&num )
+    {
+        vector<int>pre(tar+1,0);
+        pre[0]=1;
+        if(num[0]<=tar)
+        pre[num[0]]=1;
+
+        for(int i=1;i<n;i++)
+        {
+            for(int j=tar;j>0;j--)
+            {
+                int nt=pre[j];
+                int t=0;
+                if(j>=num[i])
+                t=pre[j-num[i]];
+
+                pre[j]=t|nt;
+            }
+        }
+        return pre[tar];
+    }
+
+};
