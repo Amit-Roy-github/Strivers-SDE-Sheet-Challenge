@@ -1,0 +1,62 @@
+//{ Driver Code Starts
+#include <bits/stdc++.h>
+using namespace std;
+
+// } Driver Code Ends
+class Solution{
+		
+ int solve(int ind,int n,  int nums[],vector<int>&dp)
+    { 
+        if(dp[ind]!=-1)
+        return dp[ind];
+        int c=0;
+        for(int i=ind+1;i<n;i++)
+        {
+            if(nums[i]>nums[ind])
+            {
+                c=max(c,solve(i,n,nums,dp));
+            }
+        }
+        return dp[ind]=c+nums[ind];
+    }
+	public:
+	int maxSumIS(int arr[], int n)  
+	{  
+	    // Your code goes here
+	    vector<int>dp(n,-1);
+	    for(int i=0;i<n;i++)
+	    {
+	        int a=solve(i,n,arr,dp);
+	    }
+	    return *max_element(dp.begin(),dp.end());
+	}  
+};
+
+//{ Driver Code Starts.
+int main() 
+{
+   	
+   
+   	int t;
+    cin >> t;
+    while (t--)
+    {
+        int n;
+        cin >> n;
+
+        int a[n];
+
+        for(int i = 0; i < n; i++)
+        	cin >> a[i];
+
+      
+
+	    Solution ob;
+	    cout << ob.maxSumIS(a, n) << "\n";
+	     
+    }
+    return 0;
+}
+
+
+// } Driver Code Ends
