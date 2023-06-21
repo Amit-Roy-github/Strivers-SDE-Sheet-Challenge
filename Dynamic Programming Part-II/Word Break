@@ -1,0 +1,32 @@
+class Solution {
+public:
+    bool solve(int ind,string&s,vector<string>&w,vector<int>&dp)
+    {
+        if(ind==s.size())
+        return true;
+
+        if(dp[ind]!=-1)
+        return dp[ind];
+
+        for(int i=0;i<w.size();i++)
+        {
+            bool f=true;
+            for(int j=0;j<w[i].size();j++)
+            {
+                if(j+ind>=s.size() || s[ind+j]!=w[i][j])
+                {
+                    f=false;
+                    break;
+                }
+            }
+            if(f){
+            if(solve(ind+w[i].size(),s,w,dp))return dp[ind]=true;
+            }
+        }
+        return dp[ind]=false;
+    }
+    bool wordBreak(string s, vector<string>& wordDict) {
+        vector<int>dp(s.size()+1,-1);
+        return solve(0,s,wordDict,dp);
+    }
+};
