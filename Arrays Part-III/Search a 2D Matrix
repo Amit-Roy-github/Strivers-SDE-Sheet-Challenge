@@ -1,0 +1,36 @@
+class Solution {
+public:
+    bool searchMatrix(vector<vector<int>>& matrix, int target) {
+        int row=matrix.size();
+        int col=matrix[0].size();
+        
+       int s=0,e=row-1;
+       while(s<=e)
+       {
+           int mid=(s+e)>>1;
+           if(target>=matrix[mid][0] && target<=matrix[mid][col-1])
+           {
+               return binarysearch(matrix[mid],0,col-1,target);
+           }
+           if(target>matrix[mid][col-1])
+           s=mid+1;
+           else
+           e=mid-1;
+       }
+       return false;
+    }
+    bool binarysearch(vector<int>& nums,int s,int e,int target) //binary search function
+    {
+        if(s<=e)
+        {
+            int mid=(s+e)/2;
+            if(nums[mid]==target)
+                return true;
+            else if(target>nums[mid])
+                return binarysearch(nums,mid+1,e,target);
+            else
+                return binarysearch(nums,s,mid-1,target);            
+        }
+        return false;
+    }
+};
