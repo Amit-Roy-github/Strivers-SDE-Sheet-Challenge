@@ -1,0 +1,26 @@
+class Solution {
+public:
+    vector<vector<int>> merge(vector<vector<int>>& inte) {
+        sort(inte.begin(),inte.end());
+
+        vector<vector<int>>ans;
+
+        int a=inte[0][0],b=inte[0][1];
+
+        for(int i=1;i<inte.size();i++)
+        {
+            if(b>=inte[i][0])
+            {
+                b=max(inte[i][1],b);
+            }
+            else
+            {
+                ans.push_back({a,b});
+                a=inte[i][0];
+                b=inte[i][1];
+            }
+        }
+        ans.push_back({a,b});
+        return ans;
+    }
+};
