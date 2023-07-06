@@ -2,13 +2,14 @@ class Solution {
     private:
     int funct(TreeNode*root)
     {
-        if (root==NULL)return 0;
-        int lh= funct(root->left);
-        if (lh== -1)return -1;
-        int rh= funct(root->right);
-        if (rh== -1)return -1;
-        if (abs(lh-rh)>1)return -1;
-        return max(lh,rh)+1;
+        if(!root)return 0;
+         int l=funct(root->left);
+         int r=funct(root->right);
+         if(l==-1 || r==-1)
+         return -1;
+
+         if(abs(l-r)>1)return -1;
+         return max(l,r)+1;
     }
 public:
     bool isBalanced(TreeNode* root) {
