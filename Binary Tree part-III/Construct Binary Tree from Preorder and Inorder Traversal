@@ -27,3 +27,32 @@ public:
   return constructTree(preorder, preStart, preEnd, inorder, inStart, inEnd, mp);
     }
 };
+
+
+
+///////2nd approch \\\\\\\
+class Solution {
+public:
+TreeNode * build(unordered_map<int,int>&mp,vector<int>&pre,int &nd,int s,int e)
+{
+    
+    TreeNode* node  = new TreeNode(pre[nd]);
+
+    int ind  = mp[pre[nd]];
+    nd++;
+      if(s==e)return node;
+      if(nd<pre.size()&&s<=ind-1)
+    node->left = build(mp,pre,nd,s,ind-1);
+    if(nd<pre.size()&&ind+1<=e)
+    node->right = build(mp,pre,nd,ind+1,e);
+    return node;
+}
+    TreeNode* buildTree(vector<int>& pre, vector<int>& in) {
+  unordered_map<int,int>mp;
+    for(int i=0;i<in.size();i++)
+    mp[in[i]]=i;
+
+    int x=0;
+     return build(mp,pre,x,0,in.size()-1);
+    }
+};
