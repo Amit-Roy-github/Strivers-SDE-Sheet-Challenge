@@ -1,0 +1,40 @@
+BinaryTreeNode<int>* BTtoDLL(BinaryTreeNode<int>* root) {
+    // Write your code here
+    stack<BinaryTreeNode<int>*>s;
+    BinaryTreeNode<int>*pre=NULL,*curr=NULL,*tem;
+    int f=0;
+    while(!s.empty() || root)
+    {
+        while(root)
+        {
+            s.push(root);
+            root=root->left;
+        }
+        if(curr!=NULL)
+        {
+            curr->left=pre;
+            if(!s.empty())
+            curr->right=s.top();
+            else
+            curr->right=NULL;
+            pre=curr;
+            if (f == 0) {
+              tem = pre;
+              f = 1;
+            }
+        }
+
+        if (!s.empty()){
+          root = s.top();
+        s.pop();
+        curr = root;
+        s.pop();
+    }
+    if(root)
+        root=root->right;
+    }
+    if(curr)
+    curr->left=pre,curr->right=NULL;
+
+    return tem;
+}
