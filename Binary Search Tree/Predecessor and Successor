@@ -1,0 +1,65 @@
+class Solution
+{
+    private:
+    void pred( Node*root,Node*&pre,int key)
+    {
+        if(!root)return  ;
+        Node *tem=NULL;
+        if(root->key<key)
+        {
+            pre=root;
+            pred(root->right,pre,key);
+        }
+        else 
+        pred(root->left,pre,key);
+    }
+    void succ( Node*root ,Node*&suc,int key)
+    {
+        if(!root)return;
+        
+        if(root->key>key)
+        {
+            suc=root;
+            succ(root->left,suc,key);
+        }
+        else
+        succ(root->right,suc,key);
+    }
+    public:
+    void findPreSuc(Node* root, Node*& pre, Node*& suc, int key)
+    {
+        // Your code goes here
+        pre=NULL;
+        pred(root,pre,key);
+        
+        suc=NULL;
+        succ(root,suc,key);
+        
+    }
+};
+
+
+//////2nd approch \\\\\\\
+class Solution
+{
+    int f;
+    void inor(Node*root,Node*&pre,Node*&suc,int k)
+    {
+        if(!root)return;
+        inor(root->left,pre,suc,k);
+        if(root->key<k)pre=root;
+        if(root->key>k && f)
+        suc=root,f=0;
+        inor(root->right,pre,suc,k);
+    }
+    public:
+    void findPreSuc(Node* root, Node*& pre, Node*& suc, int key)
+    {
+        // Your code goes here
+        pre=NULL;
+        suc=NULL;
+        f=1;
+        inor(root,pre,suc,key);
+        
+    }
+};
