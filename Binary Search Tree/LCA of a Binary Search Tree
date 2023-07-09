@@ -1,0 +1,40 @@
+class Solution {
+public:
+    TreeNode*solve(TreeNode*root,int a ,int b)
+    {
+        if(!root)return NULL;
+
+        if(root->val>=min(a,b) && root->val<=max(a,b))
+        return root;
+
+        else if(root->val>max(a,b))
+        return solve(root->left,a,b);
+        else 
+        return solve(root->right,a,b);
+    }
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        int a=p->val,b=q->val;
+        return solve(root,a,b);
+    }
+};
+
+
+///////2nd approch \\\\\\\
+class Solution {
+public:
+ 
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        int a=p->val,b=q->val;
+         while(root)
+         {
+             if(root->val>=min(a,b) && root->val<=max(a,b))
+            return root;
+
+           else if(root->val>max(a,b))
+               root=root->left;
+           else 
+            root=root->right;
+         }
+         return root;
+    }
+};
