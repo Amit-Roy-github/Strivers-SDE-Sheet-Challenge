@@ -29,3 +29,21 @@ public:
         return solve(0,preorder.size()-1,preorder);
     }
 };
+
+//////2nd approch\\\\\
+
+TreeNode*solve(int &i ,int u,vector<int>&pre)
+    { 
+        if(i==pre.size() || pre[i] >u )return NULL;
+
+        TreeNode*root=new TreeNode(pre[i++]);
+        root->left=solve(i,root->val,pre);
+        root->right=solve(i,u,pre);
+
+        return root;
+    }
+    TreeNode* bstFromPreorder(vector<int>& preorder) {
+        int i=0;
+        return solve(i,INT_MAX,preorder);
+    }
+};
