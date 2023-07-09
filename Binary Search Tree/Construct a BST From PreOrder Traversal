@@ -1,0 +1,31 @@
+class Solution {
+public:
+    int Find(int s,int e,vector<int>&pre)
+    {
+        int root=pre[s];
+        while(s<=e)
+        {
+            if(pre[s]>root)
+            return s;
+
+            s++;
+        }
+        return -1;
+    }
+    TreeNode*solve(int s, int e , vector<int>&pre)
+    {
+        if(s>e)return NULL;
+
+        TreeNode*root=new TreeNode(pre[s]);
+        int nexGreater=Find(s,e,pre);
+        if(nexGreater==-1)
+        nexGreater=e+1;
+        root->left=solve(s+1,nexGreater-1,pre);
+        root->right=solve(nexGreater,e,pre);
+
+        return root;
+    }
+    TreeNode* bstFromPreorder(vector<int>& preorder) {
+        return solve(0,preorder.size()-1,preorder);
+    }
+};
