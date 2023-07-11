@@ -1,0 +1,24 @@
+class Solution {
+public:
+    bool findTarget(TreeNode* root, int k) {
+        if(!root)return 0;
+        unordered_map<int,int>m;
+        stack<TreeNode*>s;
+        while(!s.empty() || root)
+        {
+            while(root)
+            {
+                s.push(root);
+                root=root->left;
+            }
+            root=s.top();s.pop();
+            if(m[k-root->val])
+            return true;
+
+           
+            m[root->val]=1;
+            root=root->right;
+        }
+        return false;
+    }
+};
