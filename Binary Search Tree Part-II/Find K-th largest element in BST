@@ -1,0 +1,26 @@
+class Solution
+{
+    public:
+    int kthLargest(Node *root, int k)
+    {
+        //Your code here
+        if(root==NULL)return 0;
+        
+          stack<Node*>s;
+        while(!s.empty() || root)
+        {
+            while(root)
+            {
+                s.push(root);
+                root=root->right;
+            }
+            root=s.top();s.pop();
+            k--;
+            if(k==0)
+            return root->data;
+
+            root=root->left;
+        }
+        return root->data;
+    }
+};
