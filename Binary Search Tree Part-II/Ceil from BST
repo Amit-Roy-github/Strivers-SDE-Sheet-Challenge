@@ -1,0 +1,21 @@
+void ceil(BinaryTreeNode<int> *node,int x,int &ans)
+{
+    if(!node)return;
+
+ 
+
+    if(node->data>= x)
+    {
+        ans=node->data;
+        ceil(node->left,x,ans);
+    }
+    else 
+    ceil(node->right,x,ans);
+}
+
+int findCeil(BinaryTreeNode<int> *node, int x){
+    // Write your code here.
+    int ans=-1;
+    ceil(node,x,ans);
+    return ans;
+}
