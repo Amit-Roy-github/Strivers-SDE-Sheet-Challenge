@@ -1,0 +1,19 @@
+void floor(TreeNode<int> * root,int x,int &ans)
+{
+    if(!root)return;
+
+    if(root->val<=x)
+    {
+        ans=root->val;
+        floor(root->right,x,ans);
+    }
+    else
+    floor(root->left,x,ans);
+}
+int floorInBST(TreeNode<int> * root, int X)
+{
+    // Write your code here.
+    int ans=-1;
+    floor(root,X,ans);
+    return ans;
+}
