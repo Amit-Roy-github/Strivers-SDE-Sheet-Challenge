@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(0);
+        int maxi=0;
+       set<char>m;
+       int i=0,j=0;
+        while(i<s.length())
+        {
+            if(m.find(s[i])==m.end())
+            {
+                 
+                m.insert(s[i]);
+                i++;
+                maxi=max(maxi,i-j);
+            }
+            else 
+            {
+                m.erase(s[j]);
+                j++;
+            }
+        }
+        return maxi;
+    }
+};
