@@ -1,0 +1,14 @@
+#include<bits/stdc++.h>
+int subarraysWithSXorK(vector < int > a, int b) {
+    // Write your code here
+    unordered_map<int,int>m;
+    m[0]=1;
+    int tot=0,c=0;
+    for(int i=0;i<a.size();i++)
+    {
+         tot^=a[i];
+         c+=m[tot^b];
+         m[tot]++;
+    }
+    return c;
+}
