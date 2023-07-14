@@ -1,0 +1,39 @@
+Node*merge(Node*mid,Node*head)
+{
+     Node*curr= new Node(0),*tail=curr;
+        while(head && mid)
+        {
+            if(head->data<mid->data)
+            {
+                tail->bottom=head;
+                tail=tail->bottom;
+                head=head->bottom;
+            }
+            else{
+                tail->bottom=mid;
+                tail=tail->bottom;
+                mid=mid->bottom;
+            }
+        }
+        if(head)
+        {
+            tail->bottom=head;
+        }
+        else if(mid)
+        {
+            tail->bottom=mid;
+        }
+        return curr->bottom;
+}
+Node *flatten(Node *root)
+{
+   // Your code here
+   Node*head=root;
+   while(root->next)
+   {
+       head=merge(root->next,head);
+       root=root->next;
+   }
+   return head;
+}
+
