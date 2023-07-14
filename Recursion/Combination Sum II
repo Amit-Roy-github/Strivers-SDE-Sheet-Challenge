@@ -1,0 +1,29 @@
+class Solution {
+public:
+    vector<vector<int>> combinationSum2(vector<int>& arr, int k) {
+        vector<vector<int>>ans;
+    vector<int>v;
+    sort(arr.begin(),arr.end());
+    solve(0,k,arr,v,ans);
+      
+    return ans;
+    }
+  void solve(int ind,int sum,vector<int>&num,vector<int>&v,vector<vector<int>>&ans)
+{
+     if(sum==0)
+     {
+         ans.push_back(v);
+         return;
+     }
+     for(int i=ind;i<num.size();i++)
+    {
+        if(i>ind && num[i]==num[i-1])
+        continue;
+
+        if(num[i]>sum)break;
+        v.push_back(num[i]);
+        solve(i+1,sum-num[i],num,v,ans);
+        v.pop_back();
+    }
+}
+};
