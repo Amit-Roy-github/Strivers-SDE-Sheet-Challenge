@@ -1,0 +1,37 @@
+
+class Solution{
+public:
+    int dp[501] ;
+    bool valid(int i,int j,string &s)
+    {
+        while(i<j)
+        {
+            if(s[i]!=s[j])return 0;
+            i++;j--;
+        }
+        return 1;
+    }
+    int solve(int i,string s)
+    {
+        if(i==s.size())return 0;
+        
+        if(dp[i]!=-1)return dp[i];
+        
+        int c=1e9;
+        for(int j=i;j<s.size();j++)
+        {
+            if(valid(i,j,s))
+            {
+                c=min(c,1+solve(j+1,s));
+            }
+        }
+        return dp[i]=c;
+    }
+     
+    int palindromicPartition(string str)
+    {
+        // code here
+        memset(dp,-1,sizeof(dp));
+        return solve(0,str)-1;
+    }
+};
